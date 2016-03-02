@@ -1,5 +1,4 @@
-#ifdef GAME "GAME CLASS"
-#endif //GAME
+#pragma once
 
 #include <SFML\Graphics.hpp>
 /// \brief Main game class
