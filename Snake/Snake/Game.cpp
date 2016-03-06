@@ -1,24 +1,26 @@
 #include "Game.hpp"
 
 Game::Game()
-	:mWindow(sf::VideoMode(640, 480), "Snake") {
-	// some start initialization
-}
+	: mWindow(sf::VideoMode(800, 600), "Snake")
+	, _snake(_world.getBlockSize())
+	, _world(sf::Vector2u(800, 600)) {}
 
 void Game::run() {
 
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
+	sf::Time timestep = sf::seconds(1.f / _snake.getSpeed());
+
 	while (mWindow.isOpen()) {
 
 		proccessEvents();
 		timeSinceLastUpdate += clock.restart();
 
-		while (timeSinceLastUpdate > TimePerFrame) {
-			timeSinceLastUpdate -= TimePerFrame;
+		while (timeSinceLastUpdate > timestep) {
+			timeSinceLastUpdate -= timestep;
 			proccessEvents();
-			update(TimePerFrame);
+			update(timestep);
 		}
 
 		render();
@@ -44,24 +46,37 @@ void Game::proccessEvents() {
 }
 
 void Game::update(sf::Time deltaTime) {
-	// to do
+	_snake.tick();
+	_world.update(_snake);
+
+	if (_snake.hasLost())
+		_snake.reset();
 }
 
 void Game::render() {
 	mWindow.clear();
-	// Draw all Sprites
+	_snake.render(mWindow);
+	_world.render(mWindow);
 	mWindow.display();
 }
 
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 	switch (key) {
-	case sf::Keyboard::W :
+	case sf::Keyboard::Up :
+		if (_snake.getDirection() != Direction::Down)
+			_snake.setDirection(Direction::Up);
 		break;
-	case sf::Keyboard::S :
+	case sf::Keyboard::Down :
+		if (_snake.getDirection() != Direction::Up)
+			_snake.setDirection(Direction::Down);
 		break;
-	case sf::Keyboard::A :
+	case sf::Keyboard::Left :
+		if (_snake.getDirection() != Direction::Right)
+			_snake.setDirection(Direction::Left);
 		break;
-	case sf::Keyboard::D :
+	case sf::Keyboard::Right :
+		if (_snake.getDirection() != Direction::Left)
+			_snake.setDirection(Direction::Right);
 		break;
 	}
 }

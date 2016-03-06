@@ -1,6 +1,8 @@
-#pragma once
-
 #include <SFML\Graphics.hpp>
+
+#include "World.hpp"
+#include "Snake.hpp"
+
 /// \brief Main game class
 class Game {
 public:
@@ -37,7 +39,8 @@ private:
 private:
 /// \brief Main game window
 	sf::RenderWindow mWindow;
-/// \brief Default time per frame
-	const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
+	
+	World _world;
+	Snake _snake;
 };
 

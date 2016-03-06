@@ -3,6 +3,7 @@
 Snake::Snake(int l_blockSize)
 	: _size(l_blockSize){
 	_bodyRect.setSize(sf::Vector2f(_size - 1, _size - 1));
+	reset();
 }
 
 Snake::~Snake() {}
@@ -159,4 +160,21 @@ void Snake::tick() {
 	
 	move();
 	checkCollision();
+}
+
+void Snake::render(sf::RenderWindow &window) {
+	if (_snakeBody.empty()) return;
+
+	auto head = _snakeBody.begin();
+
+	_bodyRect.setFillColor(sf::Color::Yellow);
+	_bodyRect.setPosition(head->position.x * _size, head->position.y * _size);
+	window.draw(_bodyRect);
+
+	for (auto itr = _snakeBody.begin() + 1; itr != _snakeBody.end(); ++itr) {
+		_bodyRect.setFillColor(sf::Color::Green);
+		_bodyRect.setPosition(itr->position.x * _size, itr->position.y * _size);
+
+		window.draw(_bodyRect);
+	}
 }

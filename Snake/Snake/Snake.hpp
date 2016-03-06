@@ -2,9 +2,12 @@
 
 #include <SFML\System\Vector2.hpp>
 #include <SFML\Graphics\RectangleShape.hpp>
+#include <SFML\Graphics\RenderWindow.hpp>
 
 #include "SnakeSegment.hpp"
 #include "Direction.hpp"
+
+
 
 class Snake {
 public:
@@ -22,6 +25,7 @@ public:
 	void						move();
 	void						tick();
 	void						cut(int segment);
+	void						render(sf::RenderWindow &window);
 
 	int							getSpeed();
 	int							getLives();
@@ -31,6 +35,8 @@ public:
 	sf::Vector2i		getPosition();
 
 private:
+	using SnakeContainer = std::vector<SnakeSegment>;
+
 	void								checkCollision();
 	
 	sf::RectangleShape	_bodyRect;
