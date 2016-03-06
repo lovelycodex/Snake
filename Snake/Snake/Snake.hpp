@@ -2,6 +2,7 @@
 
 #include <SFML\System\Vector2.hpp>
 #include <SFML\Graphics\RectangleShape.hpp>
+#include <SFML\Graphics\RenderWindow.hpp>
 
 #include "SnakeSegment.hpp"
 #include "Direction.hpp"
@@ -22,6 +23,7 @@ public:
 	void						move();
 	void						tick();
 	void						cut(int segment);
+	void						render(sf::RenderWindow &window);
 
 	int							getSpeed();
 	int							getLives();
