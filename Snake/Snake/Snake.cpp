@@ -166,7 +166,6 @@ void Snake::render(sf::RenderWindow &window) {
 	if (_snakeBody.empty()) return;
 
 	auto head = _snakeBody.begin();
-
 	_bodyRect.setFillColor(sf::Color::Yellow);
 	_bodyRect.setPosition(head->position.x * _size, head->position.y * _size);
 	window.draw(_bodyRect);
