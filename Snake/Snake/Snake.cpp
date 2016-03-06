@@ -160,3 +160,19 @@ void Snake::tick() {
 	move();
 	checkCollision();
 }
+
+void Snake::render(sf::RenderWindow &window) {
+	if (_snakeBody.empty()) return;
+
+	auto head = _snakeBody.begin();
+	_bodyRect.setFillColor(sf::Color::Yellow);
+	_bodyRect.setPosition(head->position.x * _size, head->position.y * _size);
+
+	window.draw(_bodyRect);
+
+	_bodyRect.setFillColor(sf::Color::Green);
+	for (auto itr = _snakeBody.begin() + 1; itr != _snakeBody.end(); ++itr) {
+		_bodyRect.setPosition(itr->position.x * _size, itr->position.y * _size);
+		window.draw(_bodyRect);
+	}
+}
