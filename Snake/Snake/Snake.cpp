@@ -187,3 +187,11 @@ void Snake::render(sf::RenderWindow &window) {
 		window.draw(_bodyRect);
 	}
 }
+
+bool Snake::checkCollisionWithNewItem(sf::Vector2i &item) {
+	for (auto itr : _snakeBody) {
+		if (itr.position == item)
+			return true;
+	}
+	return false;
+}

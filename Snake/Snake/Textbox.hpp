@@ -10,7 +10,7 @@
 
 class Textbox {
 public:
-	Textbox() = default;
+	Textbox();
 	Textbox(int visible, int charSize, int width, sf::Vector2f screenPos);
 	~Textbox();
 

@@ -37,11 +37,15 @@ void World::respawnApple() {
 
 	_appleShape.setPosition((float)_item.x * _blockSize, (float)_item.y * _blockSize);
 }
-void World::update(Snake &player) {
+void World::update(Snake &player, Textbox &textbox) {
 	if (player.getPosition() == _item) {
 		player.extend();
 		player.increaseScore();
-		respawnApple();
+
+		textbox.add("You ate an apple. Score:" + std::to_string(player.getScore()));
+
+		while(player.checkCollisionWithNewItem(_item))
+			respawnApple();
 	}
 
 	int gridSizeX = _windowSize.x / _blockSize;
