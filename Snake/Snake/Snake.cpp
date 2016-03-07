@@ -28,7 +28,17 @@ void Snake::setDirection(Direction direction) {
 }
 
 Direction Snake::getDirection() {
-	return _direction;
+	if (_snakeBody.size() <= 1) return Direction::None;
+
+	const SnakeSegment &head = _snakeBody[0];
+	const SnakeSegment &neck = _snakeBody[1];
+
+	if (head.position.x == neck.position.x) {
+		return head.position.y > neck.position.y ? Direction::Down : Direction::Up;
+	}
+	else if(head.position.y == head.position.y) {
+		return head.position.x > neck.position.x ? Direction::Right : Direction::Left;
+	}
 }
 
 int Snake::getSpeed() {

@@ -5,15 +5,15 @@ World::World(sf::Vector2u windowSize)
 	, _blockSize(16) {
 	respawnApple();
 	_appleShape.setFillColor(sf::Color::Red);
-	_appleShape.setRadius(_blockSize / 2);
+	_appleShape.setRadius(_blockSize / 2.f);
 
 	for (int i = 0; i < 4; ++i) {
 		_bounds[i].setFillColor(sf::Color(150, 0, 0));
 		if (!((i + 1) % 2)) {
-			_bounds[i].setSize(sf::Vector2f(_windowSize.x, _blockSize));
+			_bounds[i].setSize(sf::Vector2f((float)_windowSize.x, (float)_blockSize));
 		}
 		else {
-			_bounds[i].setSize(sf::Vector2f(_blockSize, _windowSize.y));
+			_bounds[i].setSize(sf::Vector2f((float)_blockSize, (float)_windowSize.y));
 		}
 		if (i < 2) {
 			_bounds[i].setPosition(0, 0);
@@ -28,12 +28,14 @@ World::World(sf::Vector2u windowSize)
 World::~World() {}
 
 void World::respawnApple() {
+	srand(time(nullptr));
+
 	int maxX = (_windowSize.x / _blockSize) - 2;
 	int maxY = (_windowSize.y / _blockSize) - 2;
 
 	_item = sf::Vector2i(rand() % maxX + 1, rand() % maxY + 1);
 
-	_appleShape.setPosition(_item.x * _blockSize, _item.y * _blockSize);
+	_appleShape.setPosition((float)_item.x * _blockSize, (float)_item.y * _blockSize);
 }
 void World::update(Snake &player) {
 	if (player.getPosition() == _item) {
