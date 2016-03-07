@@ -15,6 +15,7 @@ public:
 	~Snake();
 
 	bool						hasLost();
+	bool						checkCollisionWithNewItem(sf::Vector2i &item);
 
 	void						setDirection(Direction direction);
 	void						increaseScore();

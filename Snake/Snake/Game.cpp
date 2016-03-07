@@ -3,7 +3,11 @@
 Game::Game()
 	: mWindow(sf::VideoMode(800, 600), "Snake")
 	, _snake(_world.getBlockSize())
-	, _world(sf::Vector2u(800, 600)) {}
+	, _world(sf::Vector2u(800, 600)) {
+	_textbox.setup(5, 14, 350, sf::Vector2f(255, 0));
+
+	_textbox.add("Hello! This is SNAKE!!!");
+}
 
 void Game::run() {
 
@@ -47,16 +51,20 @@ void Game::proccessEvents() {
 
 void Game::update(sf::Time deltaTime) {
 	_snake.tick();
-	_world.update(_snake);
+	_world.update(_snake, _textbox);
 
-	if (_snake.hasLost())
+	if (_snake.hasLost()) {
+		_textbox.clear();
+		_textbox.add("Game Over. Total Score:" + std::to_string(_snake.getScore()));
 		_snake.reset();
+	}
 }
 
 void Game::render() {
 	mWindow.clear();
 	_snake.render(mWindow);
 	_world.render(mWindow);
+	_textbox.render(mWindow);
 	mWindow.display();
 }
 

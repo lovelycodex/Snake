@@ -2,6 +2,7 @@
 
 #include "World.hpp"
 #include "Snake.hpp"
+#include "Textbox.hpp"
 
 /// \brief Main game class
 class Game {
@@ -42,5 +43,6 @@ private:
 	
 	World _world;
 	Snake _snake;
+	Textbox _textbox;
 };
 

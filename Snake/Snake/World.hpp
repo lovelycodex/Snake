@@ -6,6 +6,7 @@
 #include <SFML\Graphics\RectangleShape.hpp>
 
 #include "Snake.hpp"
+#include "Textbox.hpp"
 
 class World {
 public:
@@ -15,7 +16,7 @@ public:
 	int getBlockSize();
 
 	void respawnApple();
-	void update(Snake &player);
+	void update(Snake &player, Textbox &textbox);
 	void render(sf::RenderWindow &window);
 
 private:
