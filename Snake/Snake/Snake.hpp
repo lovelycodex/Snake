@@ -3,6 +3,7 @@
 #include <SFML\System\Vector2.hpp>
 #include <SFML\Graphics\RectangleShape.hpp>
 #include <SFML\Graphics\RenderWindow.hpp>
+#include <deque>
 
 #include "SnakeSegment.hpp"
 #include "Direction.hpp"
@@ -36,7 +37,7 @@ public:
 	sf::Vector2i		getPosition();
 
 private:
-	using SnakeContainer = std::vector<SnakeSegment>;
+	using SnakeContainer = std::deque<SnakeSegment>;
 
 	void								checkCollision();
 	
